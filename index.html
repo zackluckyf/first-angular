@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="angularApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="First Angular page">
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="resources/styles.css">
+        <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="resources/bootstrap-social.css" rel="stylesheet">
+        <link href="resources/styles.css" rel="stylesheet">
+    </head>
+        
+    <body>
+        <div ng-controller="angularController as angularCtrl">
+            <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right"                    type="button">
+                    {{showDetails ? 'Hide Details':'Show Details'}}
+            </button>
+            <a href="contactus.html">
+                <button class="btn btn-xs btn-primary pull-right" type="button"> Contact Us </button>
+            </a>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="clickable" role="presentation" ng-class="{active:isSelected(1)}">
+                    <a ng-click="select(1)" aria-controls="all vehicles" role="tab">Vehicles</a>
+                </li>
+                <li class="clickable" role="presentation" ng-class="{active:isSelected(2)}">
+                    <a ng-click="select(2)" aria-controls="suv" role="tab">SUV</a>
+                </li>
+                <li class="clickable" role="presentation" ng-class="{active:isSelected(3)}">
+                    <a ng-click="select(3)" aria-controls="truck" role="tab">Truck</a>
+                </li>
+                <li class="clickable" role="presentation" ng-class="{active:isSelected(4)}">
+                    <a ng-click="select(4)" aria-controls="car" role="tab">Car</a>
+                </li>
+            </ul>
+            <ul>
+                <li class="vehicle-display" ng-repeat="car in cars | filter:filtText">
+                    <div class="wrapper car" ng-style="{'background-image': 'linear-gradient( {{car.color1}}, {{car.color2}})'}">
+                        <div class="wrapper">
+                            <p class="black-background">Vehicle: {{car.name}} </p>
+                        </div>
+                        <div class="wrapper">
+                            <p class="black-background">Class: {{car.category}} </p>
+                        </div>
+                        <div class="wrapper">
+                            <p class="black-background">Cost: {{car.price | currency}} </p>
+                        </div>
+                        <div class="wrapper">
+                            <p ng-show="showDetails" class="black-background">Details: {{car.description}} </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script src="resources/app.js"></script>
+    </body> 
+</html>
